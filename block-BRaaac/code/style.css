@@ -1,0 +1,13 @@
+.container {
+  max-width: 180px;
+  margin: 0 auto;
+  /* text-align: center; */
+  /* background-color: aqua; */
+}
+ul {
+  list-style: none;
+}
+
+span {
+  margin-left: 20px;
+}
