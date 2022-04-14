@@ -31,6 +31,10 @@ function elm(type, attr = {}, ...children) {
   for (let key in attr) {
     if (key.startsWith("data-")) {
       element.setAttribute(key, attr[key]);
+    } else if (key.startsWith("on")) {
+      let eventType = key.replace("on", " ").toLocaleLowerCase();
+      element.addEventListener;
+      eventType, attr[key];
     } else {
       element[key] = attr[key];
     }
@@ -59,16 +63,27 @@ function createLayoutUi(data = allMOvies) {
         checked: movie.watched,
       }),
       elm("label", { id: i, innerText: movie.name }),
-      elm("span", { "data-Id": i }, "X")
+      elm(
+        "span",
+        {
+          "data-Id": i,
+          onClick: (event) => {
+            let id = event.target.dataset.id;
+            allMOvies.splice(id, 1);
+            createLayoutUi();
+          },
+        },
+        "X"
+      )
     );
 
     input.addEventListener("change", handleChange);
 
-    span.addEventListener("click", (event) => {
-      let id = event.target.dataset.id;
-      allMOvies.splice(id, 1);
-      createLayoutUi();
-    });
+    // span.addEventListener("click", (event) => {
+    //   let id = event.target.dataset.id;
+    //   allMOvies.splice(id, 1);
+    //   createLayoutUi();
+    // });
 
     rootEle.append(li);
   });
